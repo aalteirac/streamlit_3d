@@ -1,0 +1,3 @@
+recursive-include src/streamlit_3d/frontend *
+include README.md
+include LICENSE

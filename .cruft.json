@@ -1,0 +1,20 @@
+{
+  "template": "https://github.com/aalteirac/cookiecutter-streamlit-component/",
+  "commit": "b683f374b5a490524f0b837adb219ed8304843e6",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "author_name": "Anthony Alteirac",
+      "author_email": "anthony@alteirac.com",
+      "project_name": "streamlit_3d",
+      "package_name": "streamlit_3d",
+      "import_name": "streamlit_3d",
+      "description": "3d model viewer",
+      "deployment_via_github_actions": "y",
+      "working_with_dataframes": "n",
+      "open_source_license": "MIT license",
+      "_template": "https://github.com/aalteirac/cookiecutter-streamlit-component/"
+    }
+  },
+  "directory": null
+}
