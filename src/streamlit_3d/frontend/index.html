@@ -1,15 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>streamlit_3d</title>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="./streamlit-component-lib.js"></script>
     <script src="./main.js"></script>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+</head>
+<style>
+   button{
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: blue;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  button:active {
+  transform: translateY(10px);
+  background-color: #a1f362!important;
+}
+button:active #annotation{
+  border-color: #a1f362!important;
+}
+  button:hover{
+    transition: all 0.15s;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+  }
+
+  button[slot="hotspot-hand1"][data-visible],button[slot="hotspot-hand2"][data-visible],button[slot="hotspot-hand3"][data-visible]{
+    --min-hotspot-opacity: 0;
+    background-color: red;
+    cursor: pointer;
+  }
+
+  button[slot="hotspot-hand1"]:not([data-visible]),button[slot="hotspot-hand2"]:not([data-visible]),button[slot="hotspot-hand3"]:not([data-visible]) {
+    background-color: #f36262;
+    /* border: 3px solid #04ff00; */
+    cursor: pointer;
+  }
+
+  .annotation.up{
+    transform: translate(-115px, -80px);
+  }
+
+  .annotation{
+    background-color: #e5e5e5;
+    position: absolute;
+    transform: translate(20px, 20px);
+    border-radius: 10px;
+    padding: 10px;
+    min-width: 80px;
+    border-style: solid;
+    border-color: #afafaf;
+  }
+  :not(:defined) > * {
+    display: none;
+  }
+</style>
+
+<body style="margin: -3px;overflow: hidden;">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <model-viewer id="mod" disable-tap zoom="0" style="height: 100vh;width: 100%;" environment-image="neutral" ar ar-modes="webxr"  camera-controls>
+      
+    </model-viewer>
+</body>
 </html>

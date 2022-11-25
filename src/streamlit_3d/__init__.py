@@ -14,23 +14,42 @@ _component_func = components.declare_component(
 # Create the python function that will be called
 def streamlit_3d(
     key: Optional[str] = None,
+    model:Optional[str] = 'engine/scene.gltf'
 ):
     """
     Add a descriptive docstring
     """
     component_value = _component_func(
-        key=key,
+        key=key,model=model
     )
 
     return component_value
 
 
 def main():
-    st.write("## Example")
-    value = streamlit_3d()
+    if(st.session_state.get("coord") is not None):
+        coords=st.session_state["coord"] 
+    else:
+        coords=[]
+        st.session_state["coord"] = coords
+    st.markdown('''
+        <style>
+        .main .block-container{
+            max-width: unset;
+            padding-left: 5em;
+            padding-right: 5em;
+            padding-top: 1.5em;
+            padding-bottom: 1em;
+            }
+        </style>
+''', unsafe_allow_html=True)
+    st.write("## 3D Annotations | Right-Click to Annotate")
+    md=st.selectbox("3D Model:",["helmet/scene.gltf","engine/scene.gltf","turbine/scene.gltf","projector/scene.gltf","car/scene.gltf","captain/scene.gltf","moto/scene.gltf"])
+    value = streamlit_3d(model=md)
+    if value is not None:
+        coords.append(value)
+    st.table(coords)
 
-    st.write(value)
 
-
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

@@ -1,27 +1,45 @@
-// The `Streamlit` object exists because our html file includes
-// `streamlit-component-lib.js`.
-// If you get an error about "Streamlit" not being defined, that
-// means you're missing that file.
+function selectText(nodeId) {
+  const node = document.getElementById(nodeId);
+  node.focus();
+  node.click()
+  if (document.body.createTextRange) {
+      const range = document.body.createTextRange();
+      range.moveToElementText(node);
+      range.select();
+      node.focus();
+  } else if (window.getSelection) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      selection.removeAllRanges();
+      selection.addRange(range);
+  } else {
+      console.warn("Could not select text in node: Unsupported browser.");
+  }
+}
 
 function sendValue(value) {
   Streamlit.setComponentValue(value)
 }
 
-/**
- * The component's render function. This will be called immediately after
- * the component is initially loaded, and then again every time the
- * component gets new data from Python.
- */
 function onRender(event) {
-  // Only run the render code the first time the component is loaded.
+  const {model,key,} = event.detail.args;
   if (!window.rendered) {
-    // You most likely want to get the data passed in like this
-    // const {input1, input2, input3} = event.detail.args
-
-    // You'll most likely want to pass some data back to Python like this
-    // sendValue({output1: "foo", output2: "bar"})
+    const modelViewer = document.querySelector("#mod");
+    modelViewer.addEventListener('contextmenu', (event) => {
+      let hit = modelViewer.positionAndNormalFromPoint(event.clientX, event.clientY);
+      var node=`
+        <button onclick="sendValue('${hit.position.x}')" slot="hotspot-hand${hit.position.x}" data-position="${hit.position.x} ${hit.position.y} ${hit.position.z}" data-normal="${hit.normal.x} ${hit.normal.y} ${hit.normal.z}">
+          <div onfocus="selectText('ano${hit.position.x}')" id="ano${hit.position.x}" class="up annotation" contenteditable="true">Edit text</div>
+        </button>`
+      modelViewer.insertAdjacentHTML( 'beforeend', node );
+      selectText(`ano${hit.position.x}`)
+      sendValue(`${hit.position.x} ${hit.position.y} ${hit.position.z} ${hit.normal.x} ${hit.normal.y} ${hit.normal.z}`)
+    }, true);
+    document.getElementById("mod").setAttribute("src",model);
     window.rendered = true
   }
+  
 }
 
 // Render the component whenever python send a "render event"
@@ -29,4 +47,4 @@ Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRender)
 // Tell Streamlit that the component is ready to receive events
 Streamlit.setComponentReady()
 // Render with the correct height, if this is a fixed-height component
-Streamlit.setFrameHeight(100)
+Streamlit.setFrameHeight(1000)
