@@ -2,12 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="./streamlit-component-lib.js"></script>
     <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css" />
 </head>
 <style>
-   button{
+   button.bta{
     display: block;
     width: 20px;
     height: 20px;
@@ -17,30 +21,18 @@
     box-sizing: border-box;
     cursor: pointer;
   }
-  button:active {
+  button.bta:active {
   transform: translateY(10px);
   background-color: #a1f362!important;
-}
-button:active #annotation{
-  border-color: #a1f362!important;
-}
-  button:hover{
+  }
+  button.bta:active #annotation{
+    border-color: #a1f362!important;
+  }
+  button.bta:hover{
     transition: all 0.15s;
     width: 30px;
     height: 30px;
     border-radius: 20px;
-  }
-
-  button[slot="hotspot-hand1"][data-visible],button[slot="hotspot-hand2"][data-visible],button[slot="hotspot-hand3"][data-visible]{
-    --min-hotspot-opacity: 0;
-    background-color: red;
-    cursor: pointer;
-  }
-
-  button[slot="hotspot-hand1"]:not([data-visible]),button[slot="hotspot-hand2"]:not([data-visible]),button[slot="hotspot-hand3"]:not([data-visible]) {
-    background-color: #f36262;
-    /* border: 3px solid #04ff00; */
-    cursor: pointer;
   }
 
   .annotation.up{
@@ -66,7 +58,17 @@ button:active #annotation{
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <model-viewer id="mod" disable-tap zoom="0" style="height: 100vh;width: 100%;" environment-image="neutral" ar ar-modes="webxr"  camera-controls
     camera-orbit="calc(-1.5rad + env(window-scroll-y) * 4rad) calc(0deg + env(window-scroll-y) * 180deg) calc(5m - env(window-scroll-y) * 10m)">
-      
     </model-viewer>
+    <div class="popup popuptext" id="myPopup">
+      <div class="form-group">
+        <label for="nm">Name:</label>
+        <input type="text" class="form-control" id="nm">
+      </div>
+      <div class="form-group">
+        <button onclick="annotate()" type="button" class="btn">OK</button>
+        <button type="button" class="btn">DELETE</button>
+        <button onclick="showPopup()" type="button" class="btn">CANCEL</button>
+      </div>
+    </div>
 </body>
 </html>
