@@ -26,7 +26,7 @@ function onRender(event) {
   const {model,key,} = event.detail.args;
   if (!window.rendered) {
     const modelViewer = document.querySelector("#mod");
-    modelViewer.addEventListener('contextmenu', (event) => {
+    modelViewer.addEventListener('dblclick', (event) => {
       let hit = modelViewer.positionAndNormalFromPoint(event.clientX, event.clientY);
       var node=`
         <button onclick="sendValue('${hit.position.x}')" slot="hotspot-hand${hit.position.x}" data-position="${hit.position.x} ${hit.position.y} ${hit.position.z}" data-normal="${hit.normal.x} ${hit.normal.y} ${hit.normal.z}">

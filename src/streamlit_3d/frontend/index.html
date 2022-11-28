@@ -64,7 +64,8 @@ button:active #annotation{
 
 <body style="margin: -3px;overflow: hidden;">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <model-viewer id="mod" disable-tap zoom="0" style="height: 100vh;width: 100%;" environment-image="neutral" ar ar-modes="webxr"  camera-controls>
+    <model-viewer id="mod" disable-tap zoom="0" style="height: 100vh;width: 100%;" environment-image="neutral" ar ar-modes="webxr"  camera-controls
+    camera-orbit="calc(-1.5rad + env(window-scroll-y) * 4rad) calc(0deg + env(window-scroll-y) * 180deg) calc(5m - env(window-scroll-y) * 10m)">
       
     </model-viewer>
 </body>

@@ -44,12 +44,12 @@ def main():
         </style>
 ''', unsafe_allow_html=True)
     st.write("## 3D Annotations | Right-Click to Annotate")
-    md=st.selectbox("3D Model:",["helmet/scene.gltf","engine/scene.gltf","turbine/scene.gltf","projector/scene.gltf","car/scene.gltf","captain/scene.gltf","moto/scene.gltf"])
+    md=st.selectbox("3D Model:",["https://alteirac.com/models/helmet/scene.gltf","https://alteirac.com/models/engine/scene.gltf","https://alteirac.com/models/turbine/scene.gltf","https://alteirac.com/models/projector/scene.gltf","https://alteirac.com/models/car/scene.gltf","https://alteirac.com/models/captain/scene.gltf","https://alteirac.com/models/moto/scene.gltf"])
     value = streamlit_3d(model=md)
     if value is not None:
         coords.append(value)
     st.table(coords)
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
