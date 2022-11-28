@@ -54,9 +54,9 @@ function addAnnotation(event,name){
 function onRender(event) {
   const {model,key,} = event.detail.args;
   if (!window.rendered) {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      document.getElementById("vv").addEventListener('touchend', detectDoubleTapClosure());
-    }
+    // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    //   document.getElementById("vv").addEventListener('touchend', detectDoubleTapClosure());
+    // }
     const modelViewer = document.querySelector("#mod");
     modelViewer.addEventListener('dblclick', (event) => {
       lastEv=event;

@@ -51,5 +51,5 @@ def main():
     st.table(coords)
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
