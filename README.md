@@ -1,6 +1,8 @@
+<a href="https://aalteirac-streamlit-3d-app-main-su4uf9.streamlit.app/" title="3d-badge"><img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg"></a><br>
+
 # streamlit_3d
 
-3d model viewer
+<strong>A Streamlit component that lets you view, interact with, and annotate 3d models</strong>
 
 ## Installation instructions
 
