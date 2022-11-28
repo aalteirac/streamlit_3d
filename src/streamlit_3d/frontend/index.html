@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="./style.css" />
 </head>
 <style>
+  .bta .closeb {
+    margin-top: -8px;
+    margin-left: -5px;
+    position: absolute;
+    z-index: 10;
+    font-size: 15px;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    opacity: 1;
+    width: 20px;
+  }
    button.bta{
     display: block;
     width: 20px;
@@ -22,7 +33,7 @@
     cursor: pointer;
   }
   button.bta:active {
-  transform: translateY(10px);
+  transform: translateY(3px);
   background-color: #a1f362!important;
   }
   button.bta:active #annotation{
@@ -33,16 +44,18 @@
     width: 30px;
     height: 30px;
     border-radius: 20px;
+    margin-left: 7px;
+    margin-top: 1px;
   }
 
-  .annotation.up{
+  .annotation.up,.bta .closeb{
     transform: translate(-115px, -80px);
   }
 
   .annotation{
     background-color: #e5e5e5;
     position: absolute;
-    transform: translate(20px, 20px);
+    transform: translateY(3px);
     border-radius: 10px;
     padding: 10px;
     min-width: 80px;
@@ -66,8 +79,19 @@
       </div>
       <div class="form-group">
         <button onclick="annotate()" type="button" class="btn">OK</button>
-        <button type="button" class="btn">DELETE</button>
+        <button onclick="deleteNode()" type="button" class="btn">DELETE</button>
         <button onclick="showPopup()" type="button" class="btn">CANCEL</button>
+      </div>
+    </div>
+    <div class="popup popuptext" id="myPopupUpdate">
+      <div class="form-group">
+        <label for="nmupdate">Name:</label>
+        <input type="text" class="form-control" id="nmupdate">
+      </div>
+      <div class="form-group">
+        <button onclick="updateNode()" type="button" class="btn">OK</button>
+        <button onclick="deleteNode()" type="button" class="btn">DELETE</button>
+        <button onclick="showPopupUpdate()" type="button" class="btn">CANCEL</button>
       </div>
     </div>
 </body>
