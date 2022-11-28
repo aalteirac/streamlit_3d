@@ -20,15 +20,19 @@ function detectDoubleTapClosure() {
 function showPopup(){
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
+  document.getElementById("nm").focus();
 }
 function mobileCheck () {
   let check = false;
   check=(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) 
   return check;
 }
-function sendValue(value) {
+function sendValue(value,action,name) {
   var dp=value.getAttribute("data-position");
-  Streamlit.setComponentValue(dp)
+  dp=dp.split(' ')
+  var dn=value.getAttribute("data-normal");
+  dn=dn.split(' ')
+  Streamlit.setComponentValue({action:action,description:name,dataPosition:{x:parseFloat(dp[0]),y:parseFloat(dp[1]),z:parseFloat(dp[2])},dataNormal:{x:parseFloat(dn[0]),y:parseFloat(dn[1]),z:parseFloat(dn[2])}})
 }
 function annotate(){
   var nm = document.getElementById("nm");
@@ -45,11 +49,11 @@ function addAnnotation(event,name){
   }
   let hit = modelViewer.positionAndNormalFromPoint(x, y);
   var node=`
-    <button class="bta" onclick="sendValue(this)" slot="hotspot-hand${hit.position.x}" data-position="${hit.position.x} ${hit.position.y} ${hit.position.z}" data-normal="${hit.normal.x} ${hit.normal.y} ${hit.normal.z}">
+    <button class="bta" onclick="sendValue(this,'CLICK','${name}')" slot="hotspot-hand${hit.position.x}" data-position="${hit.position.x} ${hit.position.y} ${hit.position.z}" data-normal="${hit.normal.x} ${hit.normal.y} ${hit.normal.z}">
       <div id="ano${hit.position.x}" class="up annotation">${name}</div>
     </button>`
   modelViewer.insertAdjacentHTML( 'beforeend', node );
-  // sendValue(`${hit.position.x} ${hit.position.y} ${hit.position.z} ${hit.normal.x} ${hit.normal.y} ${hit.normal.z}`)
+  Streamlit.setComponentValue({action:'CREATE', description:name,dataPosition:{x:hit.position.x,y:hit.position.y,z:hit.position.z},dataNormal:{x:hit.normal.x,y:hit.normal.y,z:hit.normal.z}})
 }
 function onRender(event) {
   const {model,key,} = event.detail.args;

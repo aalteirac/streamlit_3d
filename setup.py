@@ -8,7 +8,7 @@ long_description = (this_directory / "README.md").read_text()
 setuptools.setup(
     name="streamlit-3d",
     #begin 
-    version="0.1.7", 
+    version="0.1.8", 
     #end
     author="Anthony Alteirac",
     author_email="anthony@alteirac.com",
