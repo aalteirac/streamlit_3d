@@ -5,7 +5,7 @@
 ## Installation instructions 
 
 ```sh
-pip install streamlit_3d
+pip install streamlit-3d
 ```
 
 ## Usage instructions
