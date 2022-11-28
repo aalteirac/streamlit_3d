@@ -91,9 +91,14 @@ function addAnnotation(event,name){
   Streamlit.setComponentValue({model:curMod,action:'CREATE',description:name,"data-position":{x:hit.position.x,y:hit.position.y,z:hit.position.z},"data-normal":{x:hit.normal.x,y:hit.normal.y,z:hit.normal.z}})
 }
 function onRender(event) {
-  const {model,key,points} = event.detail.args;
+  const {model,key,points,height} = event.detail.args;
   curMod=model;
   if (!window.rendered) {
+    if(mobileCheck())
+      Streamlit.setFrameHeight(400)
+    else{
+      Streamlit.setFrameHeight(height)
+    }  
     points.map((el)=>{
       createNodeModel(el.description,el['data-position'].x,el['data-position'].y,el['data-position'].z,el['data-normal'].x,el['data-normal'].y,el['data-normal'].z)
     })
@@ -116,11 +121,7 @@ Streamlit.events.addEventListener(Streamlit.RENDER_EVENT, onRender)
 
 Streamlit.setComponentReady()
 
-if(mobileCheck())
-  Streamlit.setFrameHeight(400)
-else{
-  Streamlit.setFrameHeight(1000)
-}  
+
 
 //TODO
 // OK SEND ALL VALUES (pos and text)

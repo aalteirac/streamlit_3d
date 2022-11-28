@@ -15,13 +15,14 @@ _component_func = components.declare_component(
 def streamlit_3d(
     key: Optional[str] = None,
     model:Optional[str] = 'engine/scene.gltf',
-    points:Optional[list]=[]
+    points:Optional[list]=[],
+    height:Optional[int] = 700,
 ):
     """
     Add a descriptive docstring
     """
     component_value = _component_func(
-        key=key,model=model,points=points
+        key=key,model=model,points=points,height=height
     )
 
     return component_value
