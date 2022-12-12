@@ -1,0 +1,20 @@
+name: Test
+on: [push]
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        DEBUG_P: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        echo $DEBUG_P >> secrets.txt
+
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
